@@ -1,4 +1,3 @@
-
 const express = require('express');
 const Complaint = require('../models/Complaint');
 const { authenticate, requireRole } = require('../middleware/auth');
@@ -34,8 +33,8 @@ router.post(
         location
       );
 
-      const department = retrieveDepartment(
-        analysis.category
+      const department = await retrieveDepartment(
+        analysis.summary
       );
 
       // Look for candidate duplicates:

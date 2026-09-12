@@ -54,6 +54,9 @@ export default function Login() {
 
         <p className="helper-text">
           Don't have an account? <Link to="/register" className="link">Create one</Link>
+          <p className="helper-text">
+            <Link to="/transparency" className="link">View public complaint statistics</Link> — no login required.
+            </p>
         </p>
       </div>
     </AppShell>

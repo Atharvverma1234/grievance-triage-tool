@@ -66,8 +66,8 @@ export default function Register() {
         </form>
 
         <p className="helper-text">
-          Already have an account? <Link to="/" className="link">Sign in</Link>
-        </p>
+          Already have an account? <Link to="/login" className="link">Sign in</Link>
+          </p>
       </div>
     </AppShell>
   );

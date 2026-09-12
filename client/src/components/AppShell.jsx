@@ -22,7 +22,10 @@ export default function AppShell({ children }) {
                 <Link to="/my-complaints" className="nav-link">My reports</Link>
               )}
               {user.role === 'official' && (
-                <Link to="/insights" className="nav-link">Insights</Link>
+                <>
+                  <Link to="/insights" className="nav-link">Insights</Link>
+                  <Link to="/pending-officials" className="nav-link">Approvals</Link>
+                </>
               )}
               <span className="user-label">{user.name} · {user.role}</span>
               <button onClick={() => { logout(); navigate('/'); }} className="btn-ghost">

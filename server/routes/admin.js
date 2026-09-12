@@ -97,4 +97,28 @@ router.get('/insights', authenticate, requireRole('official'), async (req, res) 
   }
 });
 
+const User = require('../models/User');
+
+// List pending officials
+router.get('/pending-officials', authenticate, requireRole('official'), async (req, res) => {
+  try {
+    const pending = await User.find({ role: 'official', approvalStatus: 'pending' }).select('name email ward createdAt');
+    res.json(pending);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+// Approve an official
+router.patch('/pending-officials/:id/approve', authenticate, requireRole('official'), async (req, res) => {
+  try {
+    const user = await User.findByIdAndUpdate(req.params.id, { approvalStatus: 'approved' }, { new: true });
+    if (!user) return res.status(404).json({ error: 'User not found' });
+    res.json({ id: user._id, name: user.name, approvalStatus: user.approvalStatus });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
+
+
 module.exports = router;
