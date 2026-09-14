@@ -465,3 +465,15 @@ tbody tr.overdue { background: rgba(214,69,69,0.05); }
   .landing-stats { grid-template-columns: 1fr; }
   .feature-grid { grid-template-columns: 1fr; }
 }
+
+.btn-toolbar {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  height: 100%;
+}
+.btn-toolbar:hover { background: var(--surface-raised); }

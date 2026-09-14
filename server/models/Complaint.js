@@ -17,6 +17,8 @@ const complaintSchema = new mongoose.Schema({
   resolutionNote: { type: String, default: null },
   locationLat: { type: Number, default: null },
   locationLng: { type: Number, default: null },
+  escalated: { type: Boolean, default: false },
+  escalatedAt: { type: Date, default: null },
   parentComplaintId: { type: mongoose.Schema.Types.ObjectId, ref: 'Complaint', default: null },
 
   status: { type: String, enum: ['open', 'in_progress', 'resolved'], default: 'open' }

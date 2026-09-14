@@ -35,7 +35,7 @@ router.post('/login', async (req, res) => {
       return res.status(403).json({ error: 'Your official account is awaiting approval from an existing official.' });
     }
 
-    const token = jwt.sign({ id: user._id, role: user.role }, process.env.JWT_SECRET, { expiresIn: '7d' });
+    const token = jwt.sign({ id: user._id, role: user.role, ward: user.ward }, process.env.JWT_SECRET, { expiresIn: '7d' });
     res.json({ token, user: { id: user._id, name: user.name, role: user.role, ward: user.ward } });
   } catch (err) {
     res.status(500).json({ error: err.message });

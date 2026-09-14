@@ -19,11 +19,16 @@ export default function AppShell({ children }) {
           {user && (
             <div className="user-area">
               {user.role === 'citizen' && (
-                <Link to="/my-complaints" className="nav-link">My reports</Link>
+                <>
+                  <Link to="/submit" className="nav-link">Report an issue</Link>
+                  <Link to="/my-complaints" className="nav-link">My reports</Link>
+                </>
               )}
               {user.role === 'official' && (
                 <>
+                  <Link to="/admin" className="nav-link">Dashboard</Link>
                   <Link to="/insights" className="nav-link">Insights</Link>
+                  <Link to="/escalated" className="nav-link">Escalated</Link>
                   <Link to="/pending-officials" className="nav-link">Approvals</Link>
                 </>
               )}

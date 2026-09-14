@@ -9,6 +9,7 @@ import Insights from './pages/Insights';
 import MyComplaints from './pages/MyComplaints';
 import PublicDashboard from './pages/PublicDashboard';
 import PendingOfficials from './pages/PendingOfficials';
+import Escalated from './pages/Escalated';
 
 export default function App() {
   return (
@@ -24,6 +25,7 @@ export default function App() {
           <Route path="/my-complaints" element={<MyComplaints />} />
           <Route path="/transparency" element={<PublicDashboard />} />
           <Route path="/pending-officials" element={<PendingOfficials />} />
+          <Route path="/escalated" element={<Escalated />} />
         </Routes>
       </BrowserRouter>
     </AuthProvider>
