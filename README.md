@@ -572,39 +572,33 @@ node scripts/approveFirstOfficial.js <official-email>
 
 # 🖥️ Screenshots
 
-> Replace these placeholders with actual screenshots before publishing the repository.
 
 ### 🏠 Landing Page
 
-```text
-[ ADD LANDING PAGE SCREENSHOT ]
-```
+
+<img width="1920" height="1536" alt="screencapture-localhost-5173-2026-09-15-23_54_06" src="https://github.com/user-attachments/assets/a04869b5-413f-4be2-8667-96d1af173cc9" />
+
 
 ### 📝 Citizen Complaint Submission
 
-```text
-[ ADD SUBMISSION + AI ANALYSIS SCREENSHOT ]
-```
+<img width="1900" height="1078" alt="Screenshot 2026-09-15 235609" src="https://github.com/user-attachments/assets/167658d3-b7d4-44dd-9fc0-c19030e3a2d7" />
+
 
 ### 🧑‍💼 Admin Command Center
 
-```text
-[ ADD ADMIN DASHBOARD SCREENSHOT ]
-```
+<img width="1917" height="1078" alt="Screenshot 2026-09-15 235706" src="https://github.com/user-attachments/assets/3547439b-9976-42ae-bf9b-8672c32e7c97" />
+
 
 ### 🗺️ Civic Insights
 
-```text
-[ ADD HEATMAP + ANALYTICS SCREENSHOT ]
-```
+<img width="1920" height="2017" alt="screencapture-localhost-5173-insights-2026-09-15-23_58_51" src="https://github.com/user-attachments/assets/fd0d1cb1-2963-483e-a996-c4c2d5c6ee23" />
+
 
 ### 🌐 Public Transparency
 
-```text
-[ ADD PUBLIC DASHBOARD SCREENSHOT ]
-```
 
-The recommended screenshots correspond to the project's existing README documentation.
+<img width="1917" height="1078" alt="Screenshot 2026-09-16 000214" src="https://github.com/user-attachments/assets/4697f58a-745a-4129-bd7e-3e55fe40e5de" />
+
 
 ---
 
