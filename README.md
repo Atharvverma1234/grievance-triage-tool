@@ -1,204 +1,705 @@
-# Civic Grievance Portal — Municipal Grievance Triage & Insight Tool
+<div align="center">
 
-An AI-powered civic complaint platform that lets citizens report municipal issues in their own words — typed or spoken, in English or a regional language — and automatically classifies, prioritizes, and routes each complaint for municipal officials, turning an unstructured flood of complaints into an actionable, triaged dashboard.
+<h1>🏙️ JanSahayak AI — Civic Grievance Portal</h1>
 
-Built for the **1M1B AI for Sustainability Virtual Internship** (in collaboration with IBM SkillsBuild & AICTE).
+<h3>AI-Powered Municipal Grievance Triage & Insight Platform</h3>
 
----
+<p>
+  <strong>Turning citizen voices into actionable civic intelligence.</strong>
+</p>
 
-## 📌 Project Info
+</div>
 
-| | |
-|---|---|
-| **Author** | Atharv Verma |
-| **SDG Alignment** | SDG 11 — Sustainable Cities and Communities |
-| **AI Tool Used** | IBM Granite (`granite3.2:8b` / `granite3.2:2b`, run locally via Ollama) + local embedding model for RAG |
-| **Stack** | MongoDB, Express.js, React, Node.js (MERN) |
-
----
-
-## 🔗 Links
-
-| Resource | Link |
-|---|---|
-| 🌐 Live deployment | `[ADD DEPLOYED URL HERE]` |
-| 🎥 Video demo | `[ADD DEMO VIDEO LINK HERE]` |
-| 📄 Project write-up (PPT/PDF) | `[ADD SUBMISSION DOCUMENT LINK HERE]` |
-| 📝 Full PRD | [`grievance-triage-prd.md`](./grievance-triage-prd.md) |
+<p align="center">
+  <a href="#-features">Features</a> •
+  <a href="#-how-it-works">How It Works</a> •
+  <a href="#-Architecture">Architecture</a> •
+  <a href="#-tech-stack">Tech Stack</a> •
+  <a href="#-getting-started">Getting Started</a> •
+  <a href="#-responsible-ai">Responsible AI</a>
+</p>
 
 ---
 
-## 🧩 The Problem
+## 🌍 About the Project
 
-Municipal bodies receive a high volume of unstructured citizen complaints — potholes, garbage overflow, water leakage, broken streetlights — through forms, calls, and social media. These are typically triaged manually, which is slow, inconsistent, and makes it hard for officials to spot patterns until residents escalate. Citizens, meanwhile, often abandon reporting altogether if they don't know which department handles their issue or can't submit comfortably in their own language.
+**Civic Grievance Portal** is an AI-powered platform designed to make municipal complaint management **faster, smarter, more accessible, and more transparent**.
 
-**How might we use AI to classify and summarize unstructured citizen grievances so that municipal officials can prioritize and respond to civic issues faster and more consistently?**
+Citizens can report issues such as potholes, garbage overflow, water leakage, broken streetlights, and drainage problems using **text or voice**, including regional Indian languages.
 
-## 👥 Who This Is For
+Behind the scenes, **IBM Granite** transforms unstructured complaints into structured civic intelligence by identifying the complaint category, urgency, language, relevant entities, duplicates, and responsible municipal department.
 
-- **Citizens** — a simple way to report a civic issue, in their own language, without needing to know the "right" department.
-- **Municipal officials** — a triaged, prioritized, ward-scoped view of incoming complaints instead of a raw unsorted list.
-- **Municipal administrators** — aggregate insight into recurring problem areas, and city-wide transparency for the public.
+For officials, this becomes a **prioritized, ward-aware command center** rather than a raw list of complaints.
 
----
+> **From “I have a problem” → to “Here is what happened, where it happened, how urgent it is, and who should handle it.”**
 
-## ✨ Features
-
-### Citizen-facing
-- Submit a complaint by **typing or speaking** — voice input in Hindi, English, Tamil, Bengali, Marathi, and Kannada via the browser's speech recognition
-- Submissions in any Indian language are automatically translated and classified by Granite — no English required
-- **Pre-submission duplicate warning** — a live check while typing flags if a similar complaint already exists nearby, before you even submit
-- Pin the exact location on an interactive map, alongside a free-text ward/landmark description
-- Attach a photo of the issue
-- Instant AI-analysis feedback on submission: category, urgency, assigned department, and detected language
-- Track complaint status, including officials' resolution notes once closed
-- **Email notification** when a complaint's status changes
-
-### Official-facing (Admin Dashboard)
-- AI-classified, prioritized complaint queue with urgency color-coding, photo thumbnails, and map links
-- **Account approval flow** — new official registrations require approval from an existing official before dashboard access is granted
-- **Ward-scoped views** — officials see their own ward's complaints by default, with an "all wards" toggle
-- **Duplicate detection** — near-identical reports are merged into a single entry with a report count
-- **Urgency-based escalation** — complaints exceeding an SLA are flagged as overdue; complaints exceeding a longer threshold auto-escalate to a dedicated Escalated view
-- **Complaint density heatmap** — a geographic heatmap of pinned complaint locations on the Insights page
-- CSV export of the current filtered queue
-- One-click status updates with a resolution note captured on closure
-
-### Public
-- **Transparency dashboard** (no login required) — city-wide totals, resolution rate, and category breakdown, open to any citizen
-- Landing page introducing the platform and its features before sign-in
-
-### AI Pipeline (IBM Granite)
-- **Classification** — sorts each complaint into pothole / garbage / water leakage / streetlight / drainage / other
-- **Entity extraction** — pulls location and urgency signals from free text
-- **Multilingual understanding** — analyzes and summarizes complaints regardless of the language they were written in
-- **Duplicate detection** — both pre-submission (live) and post-submission (authoritative), comparing complaint meaning against recent open complaints
-- **Summarization** — generates a plain-language weekly digest of complaint trends for officials
-- **Vector-based RAG department routing** — complaint summaries are embedded locally and matched via cosine similarity against department reference documents, replacing a simple category-lookup with genuine semantic retrieval
+Built for the **1M1B AI for Sustainability Virtual Internship**, in collaboration with **IBM SkillsBuild & AICTE**.
 
 ---
 
-## 🏗️ Architecture
+## 🎯 The Vision
 
+Cities generate enormous amounts of civic feedback every day.
+
+The challenge isn't simply collecting complaints.
+
+The real challenge is **understanding them, prioritizing them, routing them, detecting patterns, and acting on them quickly.**
+
+Civic Grievance Portal uses AI to bridge that gap.
+
+### 💡 Our goal
+
+> **Make every citizen complaint understandable, actionable, and visible — regardless of language or technical ability.**
+
+The project aligns with **UN Sustainable Development Goal 11 — Sustainable Cities and Communities**.
+
+---
+
+# 🚨 The Problem
+
+Municipal organizations receive complaints through forms, phone calls, social media, and other channels.
+
+These complaints are often:
+
+* Unstructured
+* Written in different languages
+* Missing the correct department
+* Repeated by multiple citizens
+* Difficult to prioritize
+* Difficult to analyze geographically
+
+Manual triage can therefore become slow and inconsistent.
+
+At the same time, citizens may hesitate to report issues because they don't know:
+
+**“Which department handles this?”**
+
+or
+
+**“How do I explain this in English?”**
+
+### ❓ The Core Question
+
+> **How might we use AI to classify and summarize unstructured citizen grievances so that municipal officials can prioritize and respond to civic issues faster and more consistently?**
+
+---
+
+# 👥 Who Is It For?
+
+| User                          | What They Get                                   |
+| ----------------------------- | ----------------------------------------------- |
+| 👨‍👩‍👧 **Citizens**         | Simple multilingual complaint reporting         |
+| 🧑‍💼 **Municipal Officials** | Prioritized and ward-scoped complaint queues    |
+| 🏛️ **Administrators**        | City-wide insights and recurring issue patterns |
+| 🌆 **Public**                 | Transparent aggregate civic statistics          |
+
+---
+
+# ✨ Features
+
+## 👤 Citizen Experience
+
+### 🗣️ Voice + Multilingual Reporting
+
+Citizens can report issues by **typing or speaking**.
+
+Supported voice languages include:
+
+`Hindi` · `English` · `Tamil` · `Bengali` · `Marathi` · `Kannada`
+
+Indian-language complaints can be translated and analyzed by Granite, removing the need for English-only reporting.
+
+### 📍 Location-Aware Complaints
+
+Citizens can:
+
+* Pin the exact issue location
+* Add a ward or landmark description
+* Upload a photo
+* Submit the complaint
+
+### 🤖 Instant AI Analysis
+
+After submission, the system provides:
+
+* Complaint category
+* Urgency
+* Responsible department
+* Detected language
+
+### 🔁 Duplicate Warning
+
+Before submitting, citizens can receive a warning when a similar nearby complaint already exists.
+
+This helps reduce unnecessary duplicate reports.
+
+### 📬 Complaint Tracking
+
+Citizens can track complaint status and view resolution notes after closure.
+
+Email notifications are triggered when the complaint status changes.
+
+---
+
+# 🧑‍💼 Municipal Command Center
+
+The admin dashboard transforms incoming complaints into an actionable queue.
+
+### ⚡ Smart Prioritization
+
+Complaints are organized using AI-derived urgency and visual priority indicators.
+
+### 🗺️ Ward-Scoped Operations
+
+Officials see complaints from their assigned ward by default, with an option to view all wards.
+
+### 🔄 Intelligent Duplicate Detection
+
+Near-identical reports can be merged into a single complaint entry while preserving the report count.
+
+### 🚨 Automatic Escalation
+
+Complaints exceeding defined SLA thresholds are flagged as overdue.
+
+Complaints crossing a longer threshold are moved into a dedicated **Escalated** view.
+
+### 🗺️ Complaint Density Heatmap
+
+The Insights dashboard visualizes geographic concentrations of civic complaints.
+
+This makes recurring problem areas easier to identify.
+
+### 📊 Data Export
+
+Officials can export the currently filtered complaint queue as CSV.
+
+### ✅ Resolution Workflow
+
+Officials can update complaint status and capture resolution notes when closing an issue.
+
+---
+
+# 🌐 Public Transparency
+
+The platform also includes a public-facing transparency dashboard.
+
+No login is required.
+
+Citizens can view:
+
+* Total complaints
+* Resolution rate
+* Category breakdown
+* Aggregate city-wide statistics
+
+No complaint-level or personal information is exposed.
+
+---
+
+# 🧠 AI Engine — IBM Granite
+
+At the heart of Civic Grievance Portal is **IBM Granite**, running locally through Ollama.
+
+### AI Capabilities
+
+| Capability                    | Purpose                                            |
+| ----------------------------- | -------------------------------------------------- |
+| 🏷️ Classification            | Categorizes civic complaints                       |
+| 🔎 Entity Extraction          | Identifies location and urgency signals            |
+| 🌎 Multilingual Understanding | Handles complaints across languages                |
+| 🔁 Duplicate Detection        | Finds semantically similar complaints              |
+| 📝 Summarization              | Generates weekly complaint digests                 |
+| 🧭 RAG Routing                | Semantically identifies the responsible department |
+
+### Supported Categories
+
+The classifier currently handles:
+
+* 🕳️ Potholes
+* 🗑️ Garbage
+* 💧 Water leakage
+* 💡 Streetlights
+* 🚰 Drainage
+* 📌 Other
+
+---
+
+# 🧬 Semantic Department Routing
+
+Instead of relying only on a simple:
+
+```text
+Complaint Category → Department
 ```
+
+the system uses **vector-based Retrieval-Augmented Generation (RAG)**.
+
+The flow is:
+
+```text
+Complaint
+    ↓
+AI Summary
+    ↓
+Local Embedding Model
+    ↓
+Vector Representation
+    ↓
+Cosine Similarity Search
+    ↓
+Department Reference Documents
+    ↓
+Responsible Department
+```
+
+This allows department routing to consider the **meaning of the complaint**, rather than relying purely on predefined category mappings.
+
+---
+
+# 🔄 How It Works
+
+```text
+                    👤 CITIZEN
+                        │
+                        ▼
+             ┌─────────────────────┐
+             │ Complaint Submission│
+             │ Text / Voice / Photo│
+             │ Location            │
+             └──────────┬──────────┘
+                        │
+                        ▼
+             ┌─────────────────────┐
+             │    IBM GRANITE      │
+             │                     │
+             │ • Classification    │
+             │ • Language          │
+             │ • Entities          │
+             │ • Urgency           │
+             │ • Summarization     │
+             └──────────┬──────────┘
+                        │
+                        ▼
+             ┌─────────────────────┐
+             │ Duplicate Detection │
+             └──────────┬──────────┘
+                        │
+                        ▼
+             ┌─────────────────────┐
+             │    Vector RAG       │
+             │ Department Routing  │
+             └──────────┬──────────┘
+                        │
+                        ▼
+                  🗄️ MongoDB
+                        │
+             ┌──────────┴──────────┐
+             ▼                     ▼
+      🧑‍💼 ADMIN DASHBOARD     🌐 PUBLIC DASHBOARD
+             │
+             ▼
+      Priority • Ward
+      Escalation • Insights
+             │
+             ▼
+       📧 Citizen Notification
+```
+
+The complete data flow is based on the project's documented architecture.
+
+---
+
+# 🏗️ Architecture
+
+```text
 grievance-triage-tool/
-├── client/                    # React frontend (Vite)
+│
+├── client/
 │   └── src/
-│       ├── pages/              # Landing, Login, Register, SubmitComplaint,
-│       │                       # AdminDashboard, Insights, MyComplaints,
-│       │                       # PublicDashboard, PendingOfficials, Escalated
-│       ├── components/         # AppShell, LocationPicker, ComplaintHeatmap
-│       └── hooks/              # useSpeechToText
-├── server/                    # Express backend
-│   ├── models/                 # User, Complaint (Mongoose schemas)
-│   ├── routes/                 # auth, complaints, admin, public
-│   ├── services/                # granite.service.js, rag.service.js,
-│   │                            # notification.service.js
-│   ├── data/                   # departments.js (RAG reference documents)
-│   └── middleware/             # auth, upload
-└── grievance-triage-prd.md    # Full product requirements document
+│       ├── pages/
+│       │   ├── Landing
+│       │   ├── Login
+│       │   ├── Register
+│       │   ├── SubmitComplaint
+│       │   ├── AdminDashboard
+│       │   ├── Insights
+│       │   ├── MyComplaints
+│       │   ├── PublicDashboard
+│       │   ├── PendingOfficials
+│       │   └── Escalated
+│       │
+│       ├── components/
+│       │   ├── AppShell
+│       │   ├── LocationPicker
+│       │   └── ComplaintHeatmap
+│       │
+│       └── hooks/
+│           └── useSpeechToText
+│
+├── server/
+│   ├── models/
+│   │   ├── User
+│   │   └── Complaint
+│   │
+│   ├── routes/
+│   │   ├── auth
+│   │   ├── complaints
+│   │   ├── admin
+│   │   └── public
+│   │
+│   ├── services/
+│   │   ├── granite.service.js
+│   │   ├── rag.service.js
+│   │   └── notification.service.js
+│   │
+│   ├── data/
+│   │   └── departments.js
+│   │
+│   └── middleware/
+│       ├── auth
+│       └── upload
+│
+└── grievance-triage-prd.md
 ```
 
-**Data flow:** Citizen submits complaint (text/voice, any language, optional pin + photo) → Granite classifies, extracts entities, detects language, checks for duplicates → vector RAG retrieves the responsible department by semantic similarity → stored in MongoDB with all AI-derived fields → admin dashboard reads, ward-filters, and aggregates this data for triage, escalation, and insights → status changes trigger citizen email notifications.
+---
+
+# 🛠️ Tech Stack
+
+### Frontend
+
+![React](https://img.shields.io/badge/React-20232A?style=for-the-badge\&logo=react\&logoColor=61DAFB)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge\&logo=vite\&logoColor=white)
+![Leaflet](https://img.shields.io/badge/Leaflet-199900?style=for-the-badge\&logo=leaflet\&logoColor=white)
+![Recharts](https://img.shields.io/badge/Recharts-22B573?style=for-the-badge)
+
+* React
+* React Router
+* Vite
+* Leaflet
+* leaflet.heat
+* Recharts
+* Web Speech API
+
+### Backend
+
+![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge\&logo=node.js\&logoColor=white)
+![Express](https://img.shields.io/badge/Express-black?style=for-the-badge\&logo=express\&logoColor=white)
+
+* Node.js
+* Express.js
+* JWT Authentication
+* Multer
+* Nodemailer
+
+### Database
+
+![MongoDB](https://img.shields.io/badge/MongoDB-47A248?style=for-the-badge\&logo=mongodb\&logoColor=white)
+
+* MongoDB Atlas
+* Mongoose
+
+### AI
+
+![IBM](https://img.shields.io/badge/IBM-052FAD?style=for-the-badge\&logo=ibm\&logoColor=white)
+
+* IBM Granite
+* Ollama
+* Local sentence embeddings
+* Vector similarity search
+* RAG
+
+The project's documented stack includes React, Node.js, Express, MongoDB, IBM Granite, Ollama, and a local embedding model.
 
 ---
 
-## 🛠️ Tech Stack
+# 🔐 Security & Governance
 
-- **Frontend:** React, React Router, Leaflet + `leaflet.heat` (maps and heatmap), Recharts (charts), Web Speech API (voice input)
-- **Backend:** Node.js, Express, JWT authentication, Multer (photo uploads), Nodemailer (email)
-- **Database:** MongoDB (Atlas)
-- **AI:** IBM Granite for generation, a local sentence-embedding model (`@xenova/transformers`) for RAG — both run locally via [Ollama](https://ollama.com) and in-process, with no cloud AI account, API key, or credit card required
+Civic infrastructure involves sensitive citizen information, so the system is designed around controlled access and responsible AI.
+
+### 👮 Official Approval
+
+New municipal officials cannot immediately access the admin dashboard.
+
+An existing official must approve their account.
+
+### 🔒 Authentication
+
+The backend uses JWT-based authentication for protected routes.
+
+### 👁️ Data Visibility
+
+Citizen contact information is not unnecessarily exposed to officials.
+
+### 🌐 Public Dashboard
+
+The public dashboard exposes only aggregate statistics.
+
+No individual complaint or personal information is displayed.
 
 ---
 
-## ⚙️ Local Setup
+# 🤖 Responsible AI
 
-### Prerequisites
-- Node.js and npm
-- MongoDB Atlas account (free tier)
-- [Ollama](https://ollama.com) installed locally
-- A Gmail account with an App Password (for email notifications — optional)
+AI should **assist people — not silently replace them.**
 
-### 1. Install Granite locally
+Civic Grievance Portal therefore keeps humans in the decision loop.
+
+### ⚖️ Fairness
+
+Classification outputs are spot-checked across categories and languages.
+
+### 🔍 Transparency
+
+AI-generated category, urgency, and department are presented as **suggestions**.
+
+Officials can override them.
+
+### 👨‍⚖️ Human Oversight
+
+No complaint is automatically rejected, dismissed, or closed by AI.
+
+Final decisions remain with municipal officials.
+
+### 🚨 Escalation, Not Automation
+
+Automatic escalation only **surfaces overdue complaints**.
+
+It never automatically resolves or dismisses them.
+
+### 🔐 Privacy
+
+The system does not require government ID or Aadhaar linkage.
+
+The public dashboard provides aggregate, anonymized statistics rather than complaint-level information.
+
+---
+
+# 🚀 Getting Started
+
+## Prerequisites
+
+Make sure you have:
+
+* Node.js
+* npm
+* MongoDB Atlas account
+* Ollama
+* Gmail account + App Password *(optional, for email notifications)*
+
+---
+
+## 1️⃣ Install IBM Granite
+
+Pull the Granite model locally:
+
 ```bash
 ollama pull granite3.2:8b
 ```
 
-### 2. Backend
+---
+
+## 2️⃣ Start the Backend
+
 ```bash
 cd server
 npm install
 ```
-Create `server/.env`:
+
+Create:
+
+```text
+server/.env
 ```
+
+Add:
+
+```env
 PORT=5000
 MONGO_URI=<your MongoDB Atlas connection string>
-JWT_SECRET=<a long random string>
+JWT_SECRET=<your JWT secret>
+
 OLLAMA_URL=http://localhost:11434
 OLLAMA_MODEL=granite3.2:8b
-EMAIL_USER=<your gmail address>
-EMAIL_PASS=<your 16-character Gmail app password>
+
+EMAIL_USER=<your Gmail address>
+EMAIL_PASS=<your Gmail App Password>
 ```
+
+Then:
+
 ```bash
 npm run dev
 ```
-On first startup, the server preloads the local embedding model for RAG — you'll see `RAG embeddings ready.` in the console before it's ready to classify complaints.
 
-### 3. Frontend
+On startup, the application loads the local embedding model for RAG.
+
+You should eventually see:
+
+```text
+RAG embeddings ready.
+```
+
+---
+
+## 3️⃣ Start the Frontend
+
 ```bash
 cd client
 npm install
 npm run dev
 ```
 
-Visit `http://localhost:5173`.
+Open:
 
-### 4. Bootstrap your first official account
-New officials require approval from an existing official — but the very first one has no one to approve them. After registering your first official account through the app, approve it directly:
+```text
+http://localhost:5173
+```
+
+---
+
+## 4️⃣ Bootstrap the First Official
+
+Because official accounts require approval, the first official account needs to be bootstrapped manually:
+
 ```bash
 cd server
+
 node scripts/approveFirstOfficial.js <official-email>
 ```
 
 ---
 
-## 🖼️ Screenshots
+# 🖥️ Screenshots
 
-> Add screenshots below — recommended: landing page, citizen submission form with AI-result card and duplicate warning, admin dashboard showing escalation/duplicate/photo columns, the Insights heatmap, and the public transparency dashboard.
+> Replace these placeholders with actual screenshots before publishing the repository.
 
-`[ADD SCREENSHOT: Landing page]`
+### 🏠 Landing Page
 
-`[ADD SCREENSHOT: Citizen submission + AI analysis card]`
+```text
+[ ADD LANDING PAGE SCREENSHOT ]
+```
 
-`[ADD SCREENSHOT: Admin complaint queue]`
+### 📝 Citizen Complaint Submission
 
-`[ADD SCREENSHOT: Insights dashboard with heatmap]`
+```text
+[ ADD SUBMISSION + AI ANALYSIS SCREENSHOT ]
+```
 
-`[ADD SCREENSHOT: Public transparency dashboard]`
+### 🧑‍💼 Admin Command Center
+
+```text
+[ ADD ADMIN DASHBOARD SCREENSHOT ]
+```
+
+### 🗺️ Civic Insights
+
+```text
+[ ADD HEATMAP + ANALYTICS SCREENSHOT ]
+```
+
+### 🌐 Public Transparency
+
+```text
+[ ADD PUBLIC DASHBOARD SCREENSHOT ]
+```
+
+The recommended screenshots correspond to the project's existing README documentation.
 
 ---
 
-## 🛡️ Responsible AI Considerations
+# 📊 Expected Impact
 
-- **Fairness:** Classification output is spot-checked across categories to avoid systematic bias toward informally phrased or regional-language complaints.
-- **Transparency:** AI-assigned category, urgency, and department are shown as suggestions officials can override — nothing is auto-closed or auto-deprioritized without human review. Department routing uses genuine vector-based semantic retrieval over a documented, inspectable set of department descriptions rather than an opaque black box.
-- **Ethics:** No complaint is auto-rejected; AI output is advisory only, and a human official makes every final decision on status and priority. Auto-escalation surfaces overdue complaints for attention — it never auto-resolves or auto-dismisses anything.
-- **Privacy:** No government ID or Aadhaar linkage is required to submit a complaint. The public transparency dashboard shows only aggregate, anonymized statistics — no complaint-level or personal data. Citizen contact details are not exposed on the admin dashboard beyond what's needed to resolve the issue.
+Civic Grievance Portal is designed to move municipal teams from:
 
-## 📈 Expected Impact
+```text
+Raw Complaint Flood
+        ↓
+Manual Reading
+        ↓
+Manual Classification
+        ↓
+Manual Routing
+        ↓
+Delayed Response
+```
 
-Officials move from manually reading a raw, unsorted complaint queue to a ward-scoped, prioritized dashboard with duplicate merging, automatic escalation, and geographic density visualization — reducing per-complaint triage time and surfacing recurring problem areas that would otherwise only become visible after repeated citizen escalation. Voice input, multilingual support, and pre-submission duplicate warnings directly widen and improve civic participation for citizens less comfortable typing in English. The public transparency dashboard extends the project's benefit beyond individual complainants to the wider community.
+to:
 
-## 🔭 Future Work
+```text
+Citizen Complaint
+        ↓
+      AI Triage
+        ↓
+Priority + Category
+        ↓
+Semantic Department Routing
+        ↓
+Ward-Aware Dashboard
+        ↓
+Escalation + Insights
+        ↓
+Faster Human Action
+```
 
-- WhatsApp Business API integration, since that's the channel most Indian civic services already route through
-- Offline-first submission queuing for low-connectivity areas
-- SMS notifications alongside email, for citizens without reliable email access
-- Fully live cloud-hosted AI inference (currently local-only by design, to remain free and credit-card-free)
+The platform also improves citizen participation through multilingual voice input and duplicate warnings while giving the public greater visibility through aggregate transparency metrics.
 
 ---
 
-## 📄 License
+# 🔭 Future Roadmap
 
-`[ADD LICENSE HERE, e.g. MIT]`
+### 📱 Citizen Accessibility
+
+* WhatsApp Business API integration
+* SMS notifications
+* Offline-first complaint queuing
+
+### ☁️ AI Infrastructure
+
+* Fully cloud-hosted AI inference
+* Scalable inference architecture
+* Production-grade model monitoring
+
+### 🏛️ Smart City Intelligence
+
+* Predictive complaint hotspots
+* Historical trend analysis
+* Department performance analytics
+* SLA performance monitoring
+* Recurring infrastructure issue detection
+
+The first four roadmap items are part of the project's documented future-work plan.
+
+---
+
+# 🌱 SDG 11 — Sustainable Cities & Communities
+
+Technology becomes meaningful when it improves the places where people live.
+
+Civic Grievance Portal contributes toward **SDG 11** by exploring how AI can help cities become:
+
+**More responsive.**
+**More inclusive.**
+**More transparent.**
+**More data-driven.**
+
+---
+
+# 👨‍💻 Built By
+
+### Atharv Verma
+
+**Electrical & Electronics Engineering • Full-Stack Developer • AI & Emerging Technologies**
+
+Built as part of the **1M1B AI for Sustainability Virtual Internship** in collaboration with **IBM SkillsBuild & AICTE**.
+
+---
+
+
+<p align="center">
+
+### 🏙️ Better complaints → Better insights → Better cities.
+
+**Built with ❤️, AI, and a vision for smarter communities.**
+
+</p>
