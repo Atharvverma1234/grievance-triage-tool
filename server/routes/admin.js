@@ -5,6 +5,7 @@ const { generateDigest } = require('../services/granite.service');
 const { authenticate, requireRole } = require('../middleware/auth');
 const Complaint = require('../models/Complaint');
 const User = require('../models/User');
+const { sendStatusUpdateEmail } = require('../services/notification.service');
 
 
 // =====================================================
@@ -136,50 +137,32 @@ router.get(
 // =====================================================
 // Update Complaint Status
 // =====================================================
-router.patch(
-  '/complaints/:id',
-  authenticate,
-  requireRole('official'),
-  async (req, res) => {
-    try {
-      const { status, resolutionNote } = req.body;
 
-      const update = {};
 
-      if (status !== undefined) {
-        update.status = status;
+router.patch('/complaints/:id', authenticate, requireRole('official'), async (req, res) => {
+  try {
+    const { status, resolutionNote } = req.body;
+    const update = {};
+    if (status !== undefined) update.status = status;
+    if (resolutionNote !== undefined) update.resolutionNote = resolutionNote;
+
+    const complaint = await Complaint.findByIdAndUpdate(req.params.id, update, { new: true, runValidators: true });
+    if (!complaint) return res.status(404).json({ error: 'Complaint not found' });
+
+    // Fire-and-forget notification — doesn't block or fail the response
+    if (status) {
+      const citizen = await User.findById(complaint.citizenId).select('email');
+      if (citizen?.email) {
+        sendStatusUpdateEmail(citizen.email, complaint.summary || complaint.rawText, status, resolutionNote);
       }
-
-      if (resolutionNote !== undefined) {
-        update.resolutionNote = resolutionNote;
-      }
-
-      const complaint = await Complaint.findByIdAndUpdate(
-        req.params.id,
-        update,
-        {
-          new: true,
-          runValidators: true
-        }
-      );
-
-      if (!complaint) {
-        return res.status(404).json({
-          error: 'Complaint not found'
-        });
-      }
-
-      res.json(complaint);
-
-    } catch (err) {
-      console.error('Error updating complaint:', err);
-
-      res.status(500).json({
-        error: err.message
-      });
     }
+
+    res.json(complaint);
+  } catch (err) {
+    console.error('Error updating complaint:', err);
+    res.status(500).json({ error: err.message });
   }
-);
+});
 
 
 // =====================================================

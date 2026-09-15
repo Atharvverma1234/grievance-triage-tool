@@ -299,9 +299,11 @@ export default function AdminDashboard() {
       ================================================== */}
       {loading ? (
 
-        <p className="page-subtitle">
-          Loading complaints…
-        </p>
+         <div className="table-wrap">
+          <div className="skeleton" style={{ height: 44, margin: '0.75rem' }} />
+          <div className="skeleton" style={{ height: 44, margin: '0.75rem' }} />
+          <div className="skeleton" style={{ height: 44, margin: '0.75rem' }} />
+        </div>
 
       ) : complaints.length === 0 ? (
 

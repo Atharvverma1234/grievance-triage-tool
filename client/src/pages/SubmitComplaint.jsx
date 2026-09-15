@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import api from '../api';
 import AppShell from '../components/AppShell';
 import LocationPicker from '../components/LocationPicker';
@@ -14,6 +14,30 @@ export default function SubmitComplaint() {
   const [loading, setLoading] = useState(false);
   const [voiceLang, setVoiceLang] = useState('hi-IN');
   const { listening, supported, startListening, stopListening } = useSpeechToText(voiceLang);
+  const [duplicateWarning, setDuplicateWarning] = useState(null);
+  const debounceRef = useRef(null);
+
+  useEffect(() => {
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+
+    if (rawText.trim().length < 15) {
+      const clearWarningTimeout = setTimeout(() => {
+        setDuplicateWarning(null);
+      }, 0);
+      return () => clearTimeout(clearWarningTimeout);
+    }
+
+    debounceRef.current = setTimeout(async () => {
+      try {
+        const res = await api.post('/complaints/check-duplicate', { rawText, location });
+        setDuplicateWarning(res.data.isDuplicate ? res.data : null);
+      } catch {
+        setDuplicateWarning(null);
+      }
+    }, 1200); // wait 1.2s after typing stops before checking
+
+    return () => clearTimeout(debounceRef.current);
+  }, [rawText, location]);
 
   const handleVoiceInput = () => {
     if (listening) stopListening();
@@ -86,6 +110,12 @@ export default function SubmitComplaint() {
                 <div>{result.detectedLanguage || 'Unknown'}</div>
               </div>
             </div>
+          </div>
+        )}
+
+        {duplicateWarning && (
+          <div className="banner banner-error" role="alert">
+            A similar complaint may already exist{duplicateWarning.location ? ` near ${duplicateWarning.location}` : ''}. Please review before submitting.
           </div>
         )}
 

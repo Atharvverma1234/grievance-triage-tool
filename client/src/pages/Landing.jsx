@@ -107,7 +107,7 @@ export default function Landing() {
       </section>
 
       <footer className="landing-footer">
-        Built for the 1M1B AI for Sustainability Virtual Internship, in collaboration with IBM SkillsBuild &amp; AICTE.
+        Built by ATHARV VERMA for the 1M1B AI for Sustainability Virtual Internship, in collaboration with IBM SkillsBuild &amp; AICTE.
       </footer>
     </div>
   );
